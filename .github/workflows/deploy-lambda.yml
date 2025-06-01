@@ -21,7 +21,9 @@ jobs:
           aws-region: us-east-2
 
       - name: Zip Lambda function
-        run: zip function.zip index.js
+        run: |
+          cd src
+          zip -r ../function.zip .
 
       - name: Deploy to Lambda
         run: aws lambda update-function-code --function-name consultCEP --zip-file fileb://function.zip
