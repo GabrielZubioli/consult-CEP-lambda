@@ -1,0 +1,37 @@
+# Deploy automático Lambda via GitHub Actions
+
+Este projeto contém uma função Lambda em Node.js para consultar CEPs e um workflow GitHub Actions para deploy automático.
+
+## Como funciona
+
+- O código da função Lambda está na raiz do projeto (`index.js`).
+- Toda vez que você fizer push no branch `main`, o GitHub Actions executa o workflow que:
+  - Faz checkout do código.
+  - Configura as credenciais AWS usando Secrets.
+  - Compacta o código em um arquivo zip.
+  - Atualiza a função Lambda na AWS com o novo código.
+
+## Configuração necessária
+
+1. Criar um usuário IAM na AWS com permissão `AWSLambdaFullAccess`.
+2. Criar duas chaves de acesso para esse usuário (Access Key ID e Secret Access Key).
+3. No repositório GitHub, adicionar dois **Secrets**:
+   - `AWS_ACCESS_KEY_ID`: sua Access Key ID da AWS.
+   - `AWS_SECRET_ACCESS_KEY`: sua Secret Access Key da AWS.
+4. Verificar se o nome da função Lambda no workflow (`consultCEP`) está correto.
+5. Ajustar a região AWS no workflow (ex: `sa-east-1`).
+
+## Como usar
+
+- Faça alterações no arquivo `index.js`.
+- Commit e push para o branch `main`.
+- Aguarde o workflow executar o deploy automático.
+
+## Testes
+
+- Após o deploy, teste a função Lambda na AWS Console com um evento JSON:
+
+```json
+{
+  "cep": "01001000"
+}
