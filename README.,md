@@ -4,7 +4,7 @@ Este projeto contém uma função Lambda em Node.js para consultar CEPs e um wor
 
 ## Como funciona
 
-- O código da função Lambda está na raiz do projeto (`index.js`).
+- O código da função Lambda está na pasta src do projeto (`index.mjs`).
 - Toda vez que você fizer push no branch `main`, o GitHub Actions executa o workflow que:
   - Faz checkout do código.
   - Configura as credenciais AWS usando Secrets.
@@ -19,11 +19,11 @@ Este projeto contém uma função Lambda em Node.js para consultar CEPs e um wor
    - `AWS_ACCESS_KEY_ID`: sua Access Key ID da AWS.
    - `AWS_SECRET_ACCESS_KEY`: sua Secret Access Key da AWS.
 4. Verificar se o nome da função Lambda no workflow (`consultCEP`) está correto.
-5. Ajustar a região AWS no workflow (ex: `sa-east-1`).
+5. Ajustar a região AWS no workflow (ex: `us-east-2`).
 
 ## Como usar
 
-- Faça alterações no arquivo `index.js`.
+- Faça alterações no arquivo `index.mjs`.
 - Commit e push para o branch `main`.
 - Aguarde o workflow executar o deploy automático.
 
@@ -32,6 +32,23 @@ Este projeto contém uma função Lambda em Node.js para consultar CEPs e um wor
 - Após o deploy, teste a função Lambda na AWS Console com um evento JSON:
 
 ```json
+## Entrada esperada:
+
 {
   "cep": "01001000"
+}
+
+## Saida Esperada:
+
+{
+  "logradouro": "Praça da Sé",
+  "bairro": "Sé",
+  "cidade": "São Paulo",
+  "estado": "SP"
+}
+
+## Em caso de erro (CEP inválido ou não encontrado), a resposta terá o formato:
+
+{
+  "error": "Mensagem de erro explicativa"
 }
