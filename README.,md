@@ -52,3 +52,10 @@ Este projeto contém uma função Lambda em Node.js para consultar CEPs e um wor
 {
   "error": "Mensagem de erro explicativa"
 }
+
+## Como Testar a Function no Lambda? 
+
+Acesse esse link, apos isso é só trocar o CEP da url pra qual você deseja consultar
+
+https://yze4lr6i6xagqnpxgqd3eghg3e0gyqty.lambda-url.us-east-2.on.aws/?cep=01001000
+
